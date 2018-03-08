@@ -1,1 +1,15 @@
 <h1>Hello, <%=@user.username%> </h1>
+<br>
+<br>
+
+<h2>Here is the list of personal items that hold dear to you:</h2>
+<br>
+<div>
+  <%@user.items.each do |item|%>
+  <%=item.name%>
+  <%=item.amount%>
+
+  <%end%>
+
+</div>
+<button type="button" ><a href="/logout">Logout</a></button>
