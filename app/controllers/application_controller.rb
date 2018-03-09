@@ -9,6 +9,17 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "yeah"
   end
 
+  helpers do
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find_by(username: session[:user_id]) if session[:user_id]
+    end
+  end
+
+
   get "/" do
     erb :index
   end
@@ -38,4 +49,25 @@ class ApplicationController < Sinatra::Base
     redirect to '/'
   end
 
+  get  "/new" do
+    if logged_in?
+      erb :new
+    else
+      redirect to '/'
+    end
+  end
+
+  post "/new" do
+    if params[:item_name] == "" || params[:item_amount] ==""
+      redirect to '/new'
+    else
+      @item = current_user.items.build(name: params[:item_name])
+      @item.save
+      redirect to '/personal'
+    end
+  end
+
+  get "/personal" do
+    erb :personal
+  end
 end
