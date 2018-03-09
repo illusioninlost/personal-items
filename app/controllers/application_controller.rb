@@ -50,6 +50,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get  "/new" do
+
     if logged_in?
       erb :new
     else
@@ -58,16 +59,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/new" do
+    @user = current_user
     if params[:item_name] == "" || params[:item_amount] ==""
       redirect to '/new'
     else
-      @item = current_user.items.build(name: params[:item_name])
+      @item = current_user.items.build(name: params[:item_name], amount: params[:item_amount])
       @item.save
-      redirect to '/personal'
+      erb :personal
     end
   end
 
-  get "/personal" do
-    erb :personal
-  end
 end
