@@ -1,5 +1,5 @@
 require './config/environment'
-
+require 'pry'
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -50,7 +50,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get  "/new" do
-
     if logged_in?
       erb :new
     else
@@ -58,15 +57,17 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+
   post "/new" do
     @user = current_user
-    if params[:item_name] == "" || params[:item_amount] ==""
+    if params[:item_name] == "" || params[:item_amount] == ""
       redirect to '/new'
     else
-      @item = current_user.items.build(name: params[:item_name], amount: params[:item_amount])
+      @item = @user.items.build(name: params[:item_name], amount: params[:item_amount])
       @item.save
       erb :personal
     end
   end
+
 
 end
