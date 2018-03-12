@@ -65,9 +65,17 @@ class ApplicationController < Sinatra::Base
     else
       @item = @user.items.build(name: params[:item_name], amount: params[:item_amount])
       @item.save
-      erb :personal
+      erb :edit
     end
   end
+
+  patch "/edit" do
+    @user = current_user
+    @item = @user.items.last
+    @item.update(name: params[:item_name], amount: params[:item_amount])
+      erb :personal
+    end
+
 
 
 end

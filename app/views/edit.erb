@@ -1,0 +1,10 @@
+<h1> Edit or delete now</h1>
+
+<form  action="/edit" method="post">
+  <input type="hidden" id="hidden" name="_method" value="PATCH">
+  <h2>Item Name:</h2>
+  <input type="text" name="item_name" value="<%=@item.name%>" required>
+  <h2>Item Amount:</h2>
+  <input type="text" name="item_amount" value="<%=@item.amount%>" required>
+  <input type="submit" value="submit">
+</form>
