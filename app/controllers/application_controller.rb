@@ -76,6 +76,11 @@ class ApplicationController < Sinatra::Base
       erb :personal
     end
 
-
+    delete "/delete" do
+      @user = current_user
+      @item = @user.items.last
+      @item.delete
+      erb :personal
+    end
 
 end
