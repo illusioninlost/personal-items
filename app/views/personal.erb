@@ -6,14 +6,15 @@
 <br/>
 <div>
   <%@user.items.each do |item|%>
-<%=item.name%>
-  <%=item.amount%><br/>
+<%=item.name%>&emsp;
+&#36;<%=item.amount%><br/>
 
   <%end%>
 
 </div>
+<br/>
 
-<button type="button"><a href="/new">Create item</a></button>
+<button type="button"><a href="/new">CREATE ITEM</a></button>
 
 <br/>
 <br/>
