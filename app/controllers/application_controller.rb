@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      @current_user ||= User.find_by(username: session[:user_id]) if session[:user_id]
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
   end
 
@@ -28,6 +28,11 @@ class ApplicationController < Sinatra::Base
     erb :signup
   end
 
+  get "/personal" do
+    @user = current_user
+    erb :personal
+  end
+
   post "/signup" do
     @user = User.new(:username => params[:username], :password => params[:password])
     @user.save
@@ -37,7 +42,7 @@ class ApplicationController < Sinatra::Base
   post "/login" do
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
-      session[:user_id]=@user.username
+      session[:user_id]=@user.id
       erb :personal
     else
       redirect '/'
@@ -65,7 +70,7 @@ class ApplicationController < Sinatra::Base
     else
       @item = @user.items.build(name: params[:item_name], amount: params[:item_amount])
       @item.save
-      erb :edit
+      redirect to '/personal'
     end
   end
 
