@@ -28,15 +28,15 @@ class ApplicationController < Sinatra::Base
     erb :signup
   end
 
-  get "/personal" do
-    @user = current_user
-    erb :personal
-  end
-
   post "/signup" do
     @user = User.new(:username => params[:username], :password => params[:password])
     @user.save
     redirect to "/"
+  end
+
+  get "/personal" do
+    @user = current_user
+    erb :personal
   end
 
   post "/login" do
@@ -62,6 +62,12 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get "/edit/:id" do
+    @user = current_user
+    @item = @user.items.find_by_id(params[:id])
+    erb :edit
+  end
+
 
   post "/new" do
     @user = current_user
@@ -74,18 +80,18 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  patch "/edit" do
+  patch "/edit/:id" do
     @user = current_user
-    @item = @user.items.last
+    @item = @user.items.find_by_id(params[:id])
     @item.update(name: params[:item_name], amount: params[:item_amount])
-      erb :personal
+      redirect to '/personal'
     end
 
-    delete "/delete" do
+    delete "/delete/:id" do
       @user = current_user
-      @item = @user.items.last
+      @item = @user.items.find_by_id(params[:id])
       @item.delete
-      erb :personal
+      redirect to '/personal'
     end
 
 end

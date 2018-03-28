@@ -7,8 +7,8 @@
 <div>
   <%@user.items.each do |item|%>
       <%=item.name%>&emsp;
-      &#36;<%=item.amount%>&emsp;
-      <button type="button"><a href="/edit">EDIT/DELETE ITEM</a></button>
+      &#36;<%=item.amount%>&emsp;&emsp;
+      <button type="button"><a href="/edit/<%=item.id%>">EDIT/DELETE ITEM</a></button>
       <br>
   <%end%>
 
