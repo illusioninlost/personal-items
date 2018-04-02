@@ -47,6 +47,10 @@
     line-height: 36px;
   }
 
+  h5 {
+    color: red;
+  }
+
   p {
     margin-bottom: 18px;
   }

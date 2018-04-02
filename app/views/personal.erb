@@ -6,6 +6,7 @@
 <br/>
 <div>
   <%@user.items.each do |item|%>
+  <div style = "border: 2px solid black; margin: 5px; padding: 3px">
       <%=item.name%>&emsp;
       &#36;<%=item.amount%>&emsp;&emsp;
       <button type="button"><a href="/edit/<%=item.id%>">EDIT</a></button>
@@ -13,8 +14,10 @@
         <input type="hidden" id="hidden" name="_method" value="DELETE">
         <input type="submit" value="DELETE ITEM">
       </form>
+    </div>
       <br>
       <br>
+
   <%end%>
 
 </div>
