@@ -1,4 +1,8 @@
+require 'rack-flash'
+
 class UsersController < ApplicationController
+
+  use Rack::Flash
 
   get "/" do
       erb :index
@@ -25,6 +29,7 @@ class UsersController < ApplicationController
       session[:user_id]=@user.id
         redirect to '/personal'
       else
+        flash[:message] = "Your username or password is invalid. Please try again."
         redirect '/'
       end
   end

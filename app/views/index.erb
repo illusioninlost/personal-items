@@ -4,6 +4,14 @@
 <br>
 <br>
 
+<h3><% if flash.has?(:message)%>
+<%= flash[:message] %>
+<% end %>
+</h3>
+
+<br>
+<br>
+
 <form  action="/login" method="post">
   <h4>Username:</h4>
   <input type="text" name="username"><br>
